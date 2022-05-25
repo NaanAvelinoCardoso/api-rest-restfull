@@ -17,6 +17,26 @@ export const name = (req: Request, res: Response) => {
 
 export const addFrases = async (req: Request, res: Response) => {
     let { author, text } = req.body;
+
     let newFrase = await Frases.create({ author, text });
+    res.status(201);
     res.json({id: newFrase.id, author, text});
+}
+
+export const getFrases = async (req: Request, res: Response) => {
+    let list = await Frases.findAll();
+    res.json({ list });
+}
+
+export const idFrase = async (req: Request, res: Response) => {
+    let { id } = req.params;
+    let frase = await Frases.findByPk(id);
+
+    if(frase) {
+        res.status(200);
+        res.json({ frase });
+    } else {
+        res.status(404);
+        res.json({error: 'frase näo encontrada!'});
+    }
 }

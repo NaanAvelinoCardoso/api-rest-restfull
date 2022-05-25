@@ -8,4 +8,6 @@ router.get('/ping', apiController.ping);
 router.get('/random', apiController.random);
 router.get('/name/:name', apiController.name);
 
+router.post('/frases', apiController.addFrases);
+
 export default router;

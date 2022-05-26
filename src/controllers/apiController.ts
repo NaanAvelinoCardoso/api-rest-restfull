@@ -59,6 +59,8 @@ export const updateFrase = async (req: Request, res: Response) => {
     }
 }
 
-export const deleteFrase = (req: Request, res: Response) => {
-
+export const deleteFrase = async (req: Request, res: Response) => {
+    let { id } = req.params;
+    await Frases.destroy({ where: { id } });
+    res.json({});
 }

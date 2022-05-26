@@ -40,3 +40,25 @@ export const idFrase = async (req: Request, res: Response) => {
         res.json({error: 'frase näo encontrada!'});
     }
 }
+
+export const updateFrase = async (req: Request, res: Response) => {
+    let { id } = req.params;
+    let { author, text } = req.body;
+
+    let frase = await Frases.findByPk(id);
+    if(frase) {
+        frase.author = author;
+        frase.text = text;
+        await frase.save();
+        
+        res.status(200);
+        res.json({ frase });
+    } else {
+        res.status(404);
+        res.json({ error: 'Frase näo encontrada!' });
+    }
+}
+
+export const deleteFrase = (req: Request, res: Response) => {
+
+}
